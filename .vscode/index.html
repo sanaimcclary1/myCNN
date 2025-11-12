@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCNN - COVID-19 Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .loader {
+            border-top-color: #06b6d4;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-4">
+                    <!-- Logo -->
+                    <div>
+                        <a href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                            <img src="https://i.imgur.com/5uVSHf4.png" alt="MyCNN Logo" class="h-8 w-8 mr-2">
+                            <span class="font-bold">MyCNN</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Right-side nav -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#login-section" class="py-5 px-3 text-gray-700 hover:text-gray-900">Login</a>
+                    <a href="#contact-section" class="py-5 px-3 text-gray-700 hover:text-gray-900">Contact</a>
+                    <a href="#signup-section" class="py-2 px-3 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition duration-300">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto p-8">
+
+        <!-- Login Section -->
+        <div id="login-section" class="bg-white p-8 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-blue-900">Login to Your Account</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="login-email">
+                        Email
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="login-email" type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="login-password">
+                        Password
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="login-password" type="password" placeholder="******************" required>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Sign In
+                    </button>
+                    <a class="inline-block align-baseline font-bold text-sm text-cyan-500 hover:text-cyan-700" href="#">
+                        Forgot Password?
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Signup Section (Initially Hidden) -->
+        <div id="signup-section" class="bg-white p-8 rounded-lg shadow-md mb-8 hidden">
+            <h2 class="text-2xl font-bold mb-6 text-blue-900">Create an Account</h2>
+            <form id="signup-form">
+                 <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-name">
+                        Full Name
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="signup-name" type="text" placeholder="John Doe" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-email">
+                        Email
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="signup-email" type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-password">
+                        Password
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signup-password" type="password" placeholder="******************" required>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Contact Section (Initially Hidden) -->
+        <div id="contact-section" class="bg-white p-8 rounded-lg shadow-md mb-8 hidden">
+            <h2 class="text-2xl font-bold mb-6 text-blue-900">Contact Us</h2>
+            <p class="text-gray-600 mb-6">If you have any questions or need support, please feel free to reach out to us.</p>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-bold text-gray-800">Support Email</h3>
+                    <p class="text-cyan-600"><a href="mailto:MyCNNsupport@example.com" class="hover:underline">MyCNNsupport@example.com</a></p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800">Phone Number</h3>
+                    <p class="text-gray-700">(555) 123-4567</p>
+                </div>
+                 <div>
+                    <h3 class="font-bold text-gray-800">Operating Hours</h3>
+                    <p class="text-gray-700">Monday - Friday, 9:00 AM - 5:00 PM EST</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- App Section (Initially Hidden) -->
+        <div id="app-section" class="hidden">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold mb-2 text-blue-900">COVID-19 CT Scan Analysis</h1>
+                <p class="text-gray-600 mb-6">Upload a chest CT scan image to get a prediction from our trained model.</p>
+                
+                <div class="mb-6">
+                    <label for="image-upload" class="cursor-pointer bg-cyan-500 text-white font-bold py-2 px-4 rounded hover:bg-cyan-600 transition duration-300">
+                        Upload CT Scan Image
+                    </label>
+                    <input id="image-upload" type="file" class="hidden" accept="image/*">
+                </div>
+
+                <!-- Image Preview and Results -->
+                <div id="image-preview-container" class="hidden text-center">
+                    <img id="image-preview" src="#" alt="Image Preview" class="max-w-full h-auto mx-auto rounded-lg shadow-md mb-4" style="max-height: 400px;"/>
+                    <button id="analyze-button" class="bg-green-500 text-white font-bold py-2 px-6 rounded hover:bg-green-600 transition duration-300">
+                        Analyze
+                    </button>
+                </div>
+                
+                <div id="results-container" class="hidden mt-6">
+                    <div id="loader-container" class="flex justify-center items-center mb-4">
+                        <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+                    </div>
+                    <div id="prediction-output" class="hidden text-center">
+                        <h3 class="text-2xl font-bold mb-2">Analysis Complete</h3>
+                        <div id="result-card" class="p-6 rounded-lg">
+                            <p class="text-lg font-semibold">Prediction:</p>
+                            <p id="prediction-text" class="text-4xl font-bold"></p>
+                            <p class="text-md mt-2">Confidence: <span id="confidence-score" class="font-bold"></span></p>
+                        </div>
+                         <div class="mt-4 p-4 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-800 rounded">
+                            <p><strong class="font-bold">Disclaimer:</strong> This is not a medical diagnosis. Consult a healthcare professional for an accurate assessment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Section visibility
+            const loginSection = document.getElementById('login-section');
+            const signupSection = document.getElementById('signup-section');
+            const appSection = document.getElementById('app-section');
+            const contactSection = document.getElementById('contact-section');
+
+            // Forms
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            // App elements
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreviewContainer = document.getElementById('image-preview-container');
+            const imagePreview = document.getElementById('image-preview');
+            const analyzeButton = document.getElementById('analyze-button');
+            const resultsContainer = document.getElementById('results-container');
+            const loaderContainer = document.getElementById('loader-container');
+            const predictionOutput = document.getElementById('prediction-output');
+            const resultCard = document.getElementById('result-card');
+            const predictionText = document.getElementById('prediction-text');
+            const confidenceScore = document.getElementById('confidence-score');
+
+            // Navigation links
+            document.querySelector('a[href="#login-section"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                showLogin();
+            });
+             document.querySelector('a[href="#signup-section"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                showSignup();
+            });
+            
+             document.querySelector('a[href="#contact-section"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                showContact();
+            });
+
+            function showLogin() {
+                loginSection.classList.remove('hidden');
+                signupSection.classList.add('hidden');
+                appSection.classList.add('hidden');
+                contactSection.classList.add('hidden');
+            }
+
+            function showSignup() {
+                loginSection.classList.add('hidden');
+                signupSection.classList.remove('hidden');
+                appSection.classList.add('hidden');
+                contactSection.classList.add('hidden');
+            }
+            
+            function showContact() {
+                loginSection.classList.add('hidden');
+                signupSection.classList.add('hidden');
+                appSection.classList.add('hidden');
+                contactSection.classList.remove('hidden');
+            }
+
+            function showApp() {
+                loginSection.classList.add('hidden');
+                signupSection.classList.add('hidden');
+                appSection.classList.remove('hidden');
+                contactSection.classList.add('hidden');
+            }
+            
+            // Mock Login/Signup
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // In a real app, you would validate credentials here
+                showApp();
+            });
+
+             signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // In a real app, you would create a new user here
+                showApp();
+            });
+
+
+            // Image upload handling
+            imageUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result;
+                        imagePreviewContainer.classList.remove('hidden');
+                        resultsContainer.classList.add('hidden');
+                        predictionOutput.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Analyze button click
+            analyzeButton.addEventListener('click', () => {
+                resultsContainer.classList.remove('hidden');
+                loaderContainer.classList.remove('hidden');
+                predictionOutput.classList.add('hidden');
+                
+                // --- MOCK API CALL ---
+                // In a real application, you would send the image file to your backend here.
+                // For now, we'll simulate a delay and a random result.
+                setTimeout(() => {
+                    const isCovid = Math.random() > 0.5;
+                    const confidence = (Math.random() * (0.99 - 0.85) + 0.85).toFixed(2);
+
+                    loaderContainer.classList.add('hidden');
+                    predictionOutput.classList.remove('hidden');
+                    
+                    if (isCovid) {
+                        predictionText.innerText = 'COVID-19 Positive';
+                        predictionText.className = 'text-4xl font-bold text-red-600';
+                        resultCard.className = 'p-6 rounded-lg bg-red-100 border border-red-200';
+                    } else {
+                        predictionText.innerText = 'COVID-19 Negative';
+                        predictionText.className = 'text-4xl font-bold text-green-600';
+                        resultCard.className = 'p-6 rounded-lg bg-green-100 border border-green-200';
+                    }
+                    confidenceScore.innerText = `${(confidence * 100).toFixed(0)}%`;
+                }, 2500); // Simulate 2.5 second analysis time
+            });
+        });
+    </script>
+</body>
+</html>
+
+
